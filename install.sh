@@ -5,8 +5,8 @@ REPO="waccit/os-client"
 VERSION="latest"
 GITHUB_TOKEN=""
 DOPPLER_TOKEN=""
-DOPPLER_CONFIG=""
-DOPPLER_PROJECT="os-client"
+DOPPLER_CONFIG="prod"
+DOPPLER_PROJECT="overstandard-gateway"
 LIST_VERSIONS=0
 
 usage() {
@@ -18,8 +18,8 @@ Usage:
 Options:
   --github-token TOKEN     GitHub token with private repo read access
   --doppler-token TOKEN    Doppler service token
-  --doppler-config CONFIG  Doppler config, e.g. dev or prod
-  --doppler-project NAME   Doppler project, default: os-client
+  --doppler-config CONFIG  Doppler config, default: prod, e.g. dev or prod
+  --doppler-project NAME   Doppler project, default: overstandard-gateway
   --version VERSION        Release tag, default: latest
   --list-versions          List available release versions
   -h, --help               Show help
