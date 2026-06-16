@@ -8,6 +8,7 @@ DOPPLER_TOKEN=""
 DOPPLER_CONFIG="prod"
 DOPPLER_PROJECT="overstandard-gateway"
 LIST_VERSIONS=0
+OVERWRITE_RUNTIME_CONFIG=0
 
 usage() {
   cat <<'EOF'
@@ -16,13 +17,14 @@ Usage:
   install.sh --github-token TOKEN --list-versions
 
 Options:
-  --github-token TOKEN     GitHub token with private repo read access
-  --doppler-token TOKEN    Doppler service token
-  --doppler-config CONFIG  Doppler config, default: prod, e.g. dev or prod
-  --doppler-project NAME   Doppler project, default: overstandard-gateway
-  --version VERSION        Release tag, default: latest
-  --list-versions          List available release versions
-  -h, --help               Show help
+  --github-token TOKEN           GitHub token with private repo read access
+  --doppler-token TOKEN          Doppler service token
+  --doppler-config CONFIG        Doppler config, default: prod, e.g. dev or prod
+  --doppler-project NAME         Doppler project, default: overstandard-gateway
+  --version VERSION              Release tag, default: latest
+  --overwrite-runtime-config     Regenerate /opt/os-client/config/.env from Doppler
+  --list-versions                List available release versions
+  -h, --help                     Show help
 EOF
 }
 
@@ -47,6 +49,10 @@ while [[ $# -gt 0 ]]; do
     --version)
       VERSION="${2:-}"
       shift 2
+      ;;
+    --overwrite-runtime-config)
+      OVERWRITE_RUNTIME_CONFIG=1
+      shift
       ;;
     --list-versions)
       LIST_VERSIONS=1
@@ -199,5 +205,6 @@ export DOPPLER_TOKEN
 export DOPPLER_CONFIG
 export DOPPLER_PROJECT
 export OS_CLIENT_VERSION="$VERSION"
+export OS_CLIENT_OVERWRITE_RUNTIME_CONFIG="$OVERWRITE_RUNTIME_CONFIG"
 
 bash "${tmp_dir}/install-os-client.sh"
